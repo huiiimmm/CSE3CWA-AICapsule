@@ -6,11 +6,12 @@ const requireAuth = require('../middleware/auth');
 router.use(requireAuth); // applies to all routes below in this file
 
 router.get('/', (req, res) => {
-  const rows = db.prepare('SELECT * FROM capsules WHERE user_id = ?').all(req.user.user_id);
-  res.json(rows);
-} catch (err) {
-  console.error(err);
-  res.status(500).json({ error: 'Failed to fetch capsules' });
+  try {
+    const rows = db.prepare('SELECT * FROM capsules WHERE user_id = ?').all(req.user.user_id);
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch capsules' });
   }
 });
 
