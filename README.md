@@ -41,13 +41,11 @@ GITHUB_CALLBACK_URL based on needs
 
 Backend:
 
-auth.js & capsules.js
+backend/routes/auth.js & backend/routes/capsules.js
 
 Middleware:
 
-auth.js
-
-vite proxy
+backend/middleware/auth.js & frontend/vite.config.js
 
 --- OAuth / JWT Explanation ---
 
@@ -56,7 +54,6 @@ Authentication is done through GitHub app
 --- DB persistence notes ---
 
 Refresh saving issues on inactive render deployments. 
-
 When the render deployment shuts down, all database memory also seemingly gets wiped. During an active server however, database remains intact.
 
 --- cURL results ---
@@ -101,8 +98,7 @@ alt-svc: h3=":443"; ma=86400
 
 --- Limitation ---
 
-The render deployment isn't always live, as it shuts down after a certain amount of inactivity. With the previously mentioned database persistence issues, 
-this results in user capsules not getting safely saved.
+The render deployment isn't always live, as it shuts down after a certain amount of inactivity with the free option. With the previously mentioned database persistence issues, this results in user capsules not getting safely saved over extended periods of use.
 
 --- AI usage ---
 
@@ -114,3 +110,7 @@ from the .jsx files.
 
 Majority of the bugs I encountered during development were syntax and routing errors. I repurposed majority of the frontend from past assignments (fetch calls, page loading, etc.)
 and so I found little difficulty in those aspects.
+
+A key decision I made was to integrate the landing page and login page into one unified page, as I felt that having the two separate was not necessary, and only increased
+the amount of pages the user would have to progress through. If there were more specification for these two pages, I would have kept them seperate. 
+However, considering the current requirements, I felt it to be unnecessary.
