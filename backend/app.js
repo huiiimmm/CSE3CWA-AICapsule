@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -10,5 +11,11 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 app.use('/auth', require('./routes/auth'));
 app.use('/api/capsules', require('./routes/capsules'));
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
 
 module.exports = app;
