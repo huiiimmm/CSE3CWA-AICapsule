@@ -1,0 +1,254 @@
+.dashboard-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem 1.5rem;
+}
+
+.dashboard-header {
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Buttons — matches LoginPage's button styling language */
+.btn {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #24292f;
+  color: #ffffff;
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: #32383f;
+}
+
+.btn-secondary {
+  background-color: #e5e5e5;
+  color: #1a1a1a;
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: #d6d6d6;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: #666666;
+  border: 1px solid #d0d0d0;
+}
+.btn-ghost:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-danger {
+  background-color: #ffffff;
+  color: #c0392b;
+  border: 1px solid #f0c4bd;
+}
+.btn-danger:hover {
+  background-color: #fdf0ee;
+}
+
+/* Form */
+.capsule-form {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 1.75rem;
+}
+
+.form-error {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  min-height: 70px;
+  resize: vertical;
+  margin-bottom: 0.75rem;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #24292f;
+}
+
+.form-checkboxes {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #444444;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Status text */
+.status-text {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: #666666;
+}
+
+.status-text.error {
+  color: #c0392b;
+}
+
+/* Capsule cards */
+.capsule-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.capsule-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.capsule-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.capsule-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.capsule-version {
+  font-size: 0.8rem;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.capsule-meta {
+  font-size: 0.85rem;
+  color: #888888;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.capsule-text {
+  font-size: 0.9rem;
+  color: #333333;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.capsule-text.secondary {
+  color: #666666;
+}
+
+.capsule-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background-color: #eeeeee;
+  color: #444444;
+}
+
+.badge-yes {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+.badge-no {
+  background-color: #fbeceb;
+  color: #b23b2e;
+}
+
+.capsule-link a {
+  font-size: 0.85rem;
+  color: #24292f;
+}
+
+.capsule-notes {
+  font-size: 0.85rem;
+  color: #666666;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+
+.capsule-date {
+  font-size: 0.75rem;
+  color: #aaaaaa;
+  margin-top: 0.5rem;
+}
+
+.capsule-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

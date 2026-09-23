@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import './App.css'
+import './Dashboard.css'
 
 function Dashboard() {
   const [capsuleArray, setCapsuleArray] = useState([]);
@@ -44,7 +44,7 @@ function Dashboard() {
     if (isManualRefresh) setIsRefreshing(true);
 
     try {
-      const response = await fetch("/api/capsules", {credentials: "include"});
+      const response = await fetch("/api/capsules", { credentials: "include" });
       if (!response.ok) throw new Error("Failed to load capsules");
 
       const capsuleData = await response.json();
@@ -167,127 +167,175 @@ function Dashboard() {
   };
 
   return (
-    <>
-      <div>
-        <h1>User Capsules</h1>
-        <button onClick={() => loadCapsules(true)} disabled={isRefreshing}>
-          {isRefreshing ? "Refreshing..." : "Refresh"}
-        </button>
-        <button onClick={() => { resetForm(); setShowCapsuleCreateForm(true); }}>
-          New Capsule
-        </button>
+    <div className="dashboard-page">
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">Your Capsules</h1>
+        <div className="dashboard-actions">
+          <button
+            className="btn btn-secondary"
+            onClick={() => loadCapsules(true)}
+            disabled={isRefreshing}
+          >
+            {isRefreshing ? "Refreshing..." : "Refresh"}
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => { resetForm(); setShowCapsuleCreateForm(true); }}
+          >
+            New Capsule
+          </button>
+        </div>
       </div>
 
       {showCapsuleCreateForm && (
-        <form onSubmit={handleCreateCapsule}>
-          {formError && <p>{formError}</p>}
+        <form className="capsule-form" onSubmit={handleCreateCapsule}>
+          {formError && <p className="form-error">{formError}</p>}
 
-          <input
-            placeholder="Project name"
-            value={capsuleCreateForm.project_name}
-            onChange={(e) => handleFormChange("project_name", e.target.value)}
-          />
-          <input
-            placeholder="Prompt title"
-            value={capsuleCreateForm.prompt_title}
-            onChange={(e) => handleFormChange("prompt_title", e.target.value)}
-          />
-          <input
-            placeholder="Prompt version"
-            value={capsuleCreateForm.prompt_version}
-            onChange={(e) => handleFormChange("prompt_version", e.target.value)}
-          />
+          <div className="form-grid">
+            <input
+              className="form-input"
+              placeholder="Project name"
+              value={capsuleCreateForm.project_name}
+              onChange={(e) => handleFormChange("project_name", e.target.value)}
+            />
+            <input
+              className="form-input"
+              placeholder="Prompt title"
+              value={capsuleCreateForm.prompt_title}
+              onChange={(e) => handleFormChange("prompt_title", e.target.value)}
+            />
+            <input
+              className="form-input"
+              placeholder="Prompt version"
+              value={capsuleCreateForm.prompt_version}
+              onChange={(e) => handleFormChange("prompt_version", e.target.value)}
+            />
+            <input
+              className="form-input"
+              placeholder="Category"
+              value={capsuleCreateForm.category}
+              onChange={(e) => handleFormChange("category", e.target.value)}
+            />
+            <input
+              className="form-input"
+              placeholder="Usefulness"
+              value={capsuleCreateForm.usefulness}
+              onChange={(e) => handleFormChange("usefulness", e.target.value)}
+            />
+            <input
+              className="form-input"
+              placeholder="Screenshot URL"
+              value={capsuleCreateForm.screenshot_url}
+              onChange={(e) => handleFormChange("screenshot_url", e.target.value)}
+            />
+          </div>
+
           <textarea
+            className="form-textarea"
             placeholder="Prompt text"
             value={capsuleCreateForm.prompt_text}
             onChange={(e) => handleFormChange("prompt_text", e.target.value)}
           />
           <textarea
+            className="form-textarea"
             placeholder="Response summary"
             value={capsuleCreateForm.response_summary}
             onChange={(e) => handleFormChange("response_summary", e.target.value)}
           />
-          <input
-            placeholder="Category"
-            value={capsuleCreateForm.category}
-            onChange={(e) => handleFormChange("category", e.target.value)}
-          />
-          <input
-            placeholder="Usefulness"
-            value={capsuleCreateForm.usefulness}
-            onChange={(e) => handleFormChange("usefulness", e.target.value)}
-          />
-          <label>
-            Reviewed
-            <input
-              type="checkbox"
-              checked={!!capsuleCreateForm.reviewed}
-              onChange={(e) => handleFormChange("reviewed", e.target.checked ? 1 : 0)}
-            />
-          </label>
-          <label>
-            Improved
-            <input
-              type="checkbox"
-              checked={!!capsuleCreateForm.improved}
-              onChange={(e) => handleFormChange("improved", e.target.checked ? 1 : 0)}
-            />
-          </label>
-          <input
-            placeholder="Screenshot URL"
-            value={capsuleCreateForm.screenshot_url}
-            onChange={(e) => handleFormChange("screenshot_url", e.target.value)}
-          />
           <textarea
+            className="form-textarea"
             placeholder="Notes"
             value={capsuleCreateForm.notes}
             onChange={(e) => handleFormChange("notes", e.target.value)}
           />
 
-          <button type="submit" disabled={isSaving}>
-            {isSaving ? "Saving..." : editingCapsule ? "Update Capsule" : "Create Capsule"}
-          </button>
-          <button type="button" onClick={handleCancelForm}>
-            Cancel
-          </button>
+          <div className="form-checkboxes">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={!!capsuleCreateForm.reviewed}
+                onChange={(e) => handleFormChange("reviewed", e.target.checked ? 1 : 0)}
+              />
+              Reviewed
+            </label>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={!!capsuleCreateForm.improved}
+                onChange={(e) => handleFormChange("improved", e.target.checked ? 1 : 0)}
+              />
+              Improved
+            </label>
+          </div>
+
+          <div className="form-actions">
+            <button className="btn btn-primary" type="submit" disabled={isSaving}>
+              {isSaving ? "Saving..." : editingCapsule ? "Update Capsule" : "Create Capsule"}
+            </button>
+            <button className="btn btn-ghost" type="button" onClick={handleCancelForm}>
+              Cancel
+            </button>
+          </div>
         </form>
       )}
 
       {isLoading ? (
-        <p>Loading capsules...</p>
+        <p className="status-text">Loading capsules...</p>
       ) : (
-        <div>
-          {validationMessage && <p>{validationMessage}</p>}
+        <div className="capsule-list">
+          {validationMessage && <p className="status-text error">{validationMessage}</p>}
 
           {capsuleArray.length === 0 && !validationMessage && (
-            <p>No capsules yet.</p>
+            <p className="status-text">No capsules yet.</p>
           )}
 
           {capsuleArray.map((capsule) => (
-            <div key={capsule.id}>
-              <h3>{capsule.prompt_title}</h3>
-              <p>Project: {capsule.project_name}</p>
-              <p>Version: {capsule.prompt_version}</p>
-              <p>Prompt: {capsule.prompt_text}</p>
-              <p>Response summary: {capsule.response_summary}</p>
-              <p>Category: {capsule.category}</p>
-              <p>Usefulness: {capsule.usefulness}</p>
-              <p>Reviewed: {capsule.reviewed ? "Yes" : "No"}</p>
-              <p>Improved: {capsule.improved ? "Yes" : "No"}</p>
+            <div className="capsule-card" key={capsule.id}>
+              <div className="capsule-card-header">
+                <h3 className="capsule-title">{capsule.prompt_title}</h3>
+                <span className="capsule-version">{capsule.prompt_version}</span>
+              </div>
+
+              <p className="capsule-meta">{capsule.project_name} · {capsule.category}</p>
+
+              <p className="capsule-text">{capsule.prompt_text}</p>
+              <p className="capsule-text secondary">{capsule.response_summary}</p>
+
+              <div className="capsule-badges">
+                <span className="badge">{capsule.usefulness}</span>
+                <span className={`badge ${capsule.reviewed ? "badge-yes" : "badge-no"}`}>
+                  Reviewed: {capsule.reviewed ? "Yes" : "No"}
+                </span>
+                <span className={`badge ${capsule.improved ? "badge-yes" : "badge-no"}`}>
+                  Improved: {capsule.improved ? "Yes" : "No"}
+                </span>
+              </div>
+
               {capsule.screenshot_url && (
-                <p>
-                  Screenshot: <a href={capsule.screenshot_url}>{capsule.screenshot_url}</a>
+                <p className="capsule-link">
+                  <a href={capsule.screenshot_url} target="_blank" rel="noreferrer">
+                    View screenshot
+                  </a>
                 </p>
               )}
-              <p>Notes: {capsule.notes}</p>
-              <p>Created: {capsule.created_at}</p>
-              <button onClick={() => handleEdit(capsule)}>Edit</button>
-              <button onClick={() => handleDelete(capsule)}>Delete</button>
+
+              {capsule.notes && <p className="capsule-notes">{capsule.notes}</p>}
+
+              <p className="capsule-date">Created {capsule.created_at}</p>
+
+              <div className="capsule-card-actions">
+                <button className="btn btn-secondary" onClick={() => handleEdit(capsule)}>
+                  Edit
+                </button>
+                <button className="btn btn-danger" onClick={() => handleDelete(capsule)}>
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
