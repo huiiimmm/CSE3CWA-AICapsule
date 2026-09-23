@@ -59,6 +59,7 @@ When the render deployment shuts down, all database memory also seemingly gets w
 --- cURL results ---
 
 Test 1 - no authentication
+
 curl -i https://YOUR-APP/api/capsules
 Required: 401 Unauthorized
 Result:
@@ -78,6 +79,7 @@ alt-svc: h3=":443"; ma=86400
 {"error":"Unauthorized"}
 
 Test 2 - fake / invalid JWT
+
 curl -i -H "Cookie: token=fake-token-123" https://YOUR-APP/api/capsules
 Required: 401 Unauthorized
 Result:
