@@ -5,7 +5,7 @@ function ProtectedRoute({ children }) {
   const [authStatus, setAuthStatus] = useState('checking'); // 'checking' | 'authenticated' | 'unauthenticated'
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/capsules`, {
+    fetch("/api/capsules", {
       credentials: "include"
     })
       .then((res) => {

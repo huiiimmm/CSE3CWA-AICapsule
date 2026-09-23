@@ -44,9 +44,7 @@ function Dashboard() {
     if (isManualRefresh) setIsRefreshing(true);
 
     try {
-      const response = await fetch("/api/capsules", {
-        credentials: "include"
-      });
+      const response = await fetch("/api/capsules", {credentials: "include"});
       if (!response.ok) throw new Error("Failed to load capsules");
 
       const capsuleData = await response.json();
