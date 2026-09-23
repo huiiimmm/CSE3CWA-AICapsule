@@ -38,7 +38,7 @@ router.get('/github/callback', async (req, res) => {
 
     const githubUser = userRes.data; // includes id, login, avatar_url, etc.
 
-    // Step 3: issue YOUR OWN application JWT — this is the one the assignment grades
+    // Step 3: issue own application JWT 
     const appToken = jwt.sign(
       { user_id: String(githubUser.id), username: githubUser.login },
       process.env.JWT_SECRET,
